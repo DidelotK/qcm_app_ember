@@ -1,0 +1,38 @@
+<table class="ui compact table">
+  <thead>
+  <tr>
+    <th>Email</th>
+    <th>Password</th>
+    <th>Role</th>
+    <th>
+      <div class="content-center">
+        <button class="ui icon button" type="button"
+          {{action (route-action 'addUser')}}><i class="add user icon"></i>
+        </button>
+      </div>
+    </th>
+  </tr></thead>
+  <tbody>
+  {{#each users as |user|}}
+    <tr>
+      <td class="middle aligned">{{user.email}}</td>
+      <td class="middle aligned">{{user.password}}</td>
+      <td class="middle aligned">{{user.role}}</td>
+      <td class="middle aligned">
+        <div class="content-center">
+          <div class="ui icon buttons">
+            <button class="ui icon button" type="button"
+              {{action (route-action 'editUser' user)}}><i class="write icon"></i>
+            </button>
+            <button class="ui icon button" type="button"
+              {{action 'removeUser' user}}><i class="remove user icon"></i>
+            </button>
+          </div>
+        </div>
+      </td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
+
+{{yield}}

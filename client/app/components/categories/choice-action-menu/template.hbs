@@ -1,0 +1,28 @@
+<div local-class="menu">
+  <div class="ui icon buttons">
+    <button class="ui icon
+    {{if (eq choiceAction 'add') 'grey'}} button"
+      {{action 'changeChoiceAction' 'add'}}>
+      <i class="plus icon"></i>
+    </button>
+    <button class="ui icon
+    {{if (eq choiceAction 'remove') 'grey'}} button"
+      {{action 'changeChoiceAction' 'remove'}}>
+      <i class="remove icon"></i>
+    </button>
+  </div>
+</div>
+{{#if (not-eq choiceAction null)}}
+  <div class="ui three item menu">
+    <a class="item
+                {{if (eq choiceCategory 'unit') 'active'}}"
+      {{action 'changeChoiceCategory' 'unit'}}>Unit</a>
+    <a class="item
+              {{if (eq choiceCategory 'course') 'active'}}"
+      {{action 'changeChoiceCategory' 'course'}}>Course</a>
+    <a class="item
+              {{if (eq choiceCategory 'chapter') 'active'}}"
+      {{action 'changeChoiceCategory' 'chapter'}}>Chapter</a>
+  </div>
+{{/if}}
+{{yield}}

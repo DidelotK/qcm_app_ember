@@ -1,0 +1,108 @@
+<h1 class="page-title">Create new question</h1>
+
+{{#question.create-nav}}{{/question.create-nav}}
+
+<form class="ui form">
+  <div class="field">
+    <label>Unit</label>
+    {{#ui-dropdown class="selection" selected=selectedUnit onChange=(action 'updateUE' selectedUnit)}}
+      <div class="default text">Choose an unit ...</div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        {{#each model.ues as |ue|}}
+          <div class="item" data-value="{{ue.id}}">
+            {{ue.name}}
+          </div>
+        {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  </div>
+  <div class="field">
+    <label>Course</label>
+    {{#ui-dropdown class="search selection" selected=selectedCourse onChange=(action 'updateCourse' selectedCourse)}}
+      <div class="default text">Choose a course ...</div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        {{#each model.courses as |course|}}
+          {{#if (eq (is-course-in-unit course selectedUnit) true)}}
+            <div class="item" data-value="{{course.id}}">
+              {{course.name}}
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  </div>
+  <div class="field">
+    <label>Chapter</label>
+    {{#ui-dropdown class="search selection" selected=selectedChapter onChange=(action 'updateChapter' selectedChapter)}}
+      <div class="default text">Choose the chapter ...</div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        {{#each model.chapters as |chapter|}}
+          {{#if (eq (is-chapter-in-course chapter selectedCourse) true)}}
+            <div class="item" data-value="{{chapter.id}}">
+              {{chapter.name}}
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  </div>
+  <div class="field">
+    <label>Question</label>
+    {{input
+    id='question'
+    type='text'
+    value=model.question.question
+    }}
+  </div>
+  <div class="field">
+    <label>Answers</label>
+    <div class="container" local-class="marg-pad">
+      {{#each model.allAnswers as |ans index|}}
+        <div class="row" local-class="marg-pad">
+          <div class="col-md-8 col-sm-8" local-class="marg-pad">
+            <div class="ui right action input">
+              {{input type="text" value=ans.answer
+              required="true"}}
+              <button class="ui icon button"
+                {{action 'removeAnswers' model.allAnswers index}}>
+                <i class="remove icon"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4">
+            {{ui-checkbox class="toggle" checked=ans.correct onChange=(action (mut ans.correct))}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    <div local-class="left">
+      <button class="circular ui icon button"
+              type="button"
+        {{action 'addAnswers' model.allAnswers}}>
+        <i class="plus icon"></i>
+      </button>
+    </div>
+  </div>
+  <div class="field">
+    <label>Difficulty</label>
+    {{input
+    id='difficulty'
+    type='text'
+    value=model.question.difficulty
+    }}
+  </div>
+  <div local-class="button">
+    <button class="ui button"
+            type="submit"
+      {{!--disabled={{model.question.validations.isInvalid}}--}}
+      {{action 'createQuestion' model.question}}>
+      Create
+    </button>
+  </div>
+</form>
+
+
+{{outlet}}

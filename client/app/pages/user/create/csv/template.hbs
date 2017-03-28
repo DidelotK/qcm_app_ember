@@ -1,0 +1,24 @@
+<h1 class="page-title">Create user</h1>
+
+{{#user.create-nav selected='file' }}{{/user.create-nav}}
+
+{{user.create.step-choose-file
+  state=state
+  action='selectFile'
+}}
+
+{{#if (gt (user.file-state state) 0)}}
+  {{user.create.step-convert-file
+  state=state
+  file=file
+  action='convertFile'
+  }}
+{{/if}}
+
+{{#if (gt (user.file-state state) 1)}}
+  {{user.create.step-valid
+  state=state
+  }}
+{{/if}}
+
+{{outlet}}

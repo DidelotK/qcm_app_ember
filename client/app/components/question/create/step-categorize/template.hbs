@@ -1,0 +1,21 @@
+<div class="ui icon
+    {{if (gt (question.file-state state) 2) "green"}}
+  {{if (and (eq (question.file-state state) 2) (eq error true)) "red"}}
+    message">
+  <i class="inbox
+      {{if (gt (question.file-state state) 2) "checkmark"}}
+    {{if (and (eq (question.file-state state) 2) (not-eq error true)) "inbox"}}
+    {{if (and (eq (question.file-state state) 2) (eq error true)) "remove"}}
+      icon"></i>
+  <div class="content" local-class="content">
+    <div class="header" local-class="header">
+      Step 3: Categorize the question
+    </div>
+    {{category.select-chapter action='categorize'
+    units=units
+    courses=courses
+    chapters=chapters}}
+  </div>
+</div>
+<br>
+{{yield}}

@@ -1,0 +1,10 @@
+.center {
+  text-align: center;
+}
+.button {
+  composes: center;
+  margin-top: 30px;
+}
+.description{
+  text-align: justify;
+}

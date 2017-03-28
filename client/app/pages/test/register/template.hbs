@@ -1,0 +1,13 @@
+<h1 local-class="page-title">Register to test</h1>
+
+{{#each model as |test|}}
+  <div local-class="button">
+    <button class="ui button"
+            type="submit"
+      {{action 'register' test}}>
+      {{test.name}}
+    </button>
+  </div>
+{{/each}}
+
+{{outlet}}

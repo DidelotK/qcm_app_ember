@@ -1,0 +1,35 @@
+<h1 class="page-title">Create class</h1>
+
+<form class="ui form">
+  <div class="field">
+    <label>Classname</label>
+    {{input
+    id='classname'
+    type='text'
+    value=model._class.name
+    }}
+  </div>
+  <div class="field">
+    <label>Student in class</label>
+    {{#ui-dropdown class="search selection multiple" selected=studentsSelected onChange=(action 'updateStudents' studentsSelected)}}
+      <div class="default text">Choose the student ...</div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        {{#each users as |user|}}
+          <div class="item" data-value="{{user.id}}">
+            {{user.email}}
+          </div>
+        {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  </div>
+  <div local-class="button">
+    <button class="ui button"
+            type="submit"
+      {{action 'createClass' model._class}}>
+      Create new class
+    </button>
+  </div>
+</form>
+
+{{outlet}}

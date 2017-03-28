@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 col-xs-10">
+      {{#ui-dropdown class="selection my-min-width fluid" selected=selectedUnit onChange=(action (mut selectedUnit)) as |execute mapper|}}
+        <div class="default text">Unit ...</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each units as |unit|}}
+            <div class="item" data-value="{{map-value mapper unit}}">
+              {{unit.name}}
+            </div>
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}
+    </div>
+    <div class="col-md-2 col-xs-2">
+      <button class="fluid ui icon button button-font-size"
+        {{action 'removeUnit'}}>
+        <i class="remove icon"></i>
+      </button>
+      <br>
+    </div>
+  </div>
+</div>
+
+{{#if error}}
+  <div class="ui negative message">
+    <i class="close icon"
+      {{action 'removeError'}}></i>
+    <div class="header">
+      Error
+    </div>
+    <p>
+      Please select an unit to remove
+    </p>
+  </div>
+{{/if}}
+
+{{yield}}

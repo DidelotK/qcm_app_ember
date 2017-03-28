@@ -1,0 +1,7 @@
+.center {
+  text-align: center;
+}
+.button {
+  composes: center;
+  margin-top: 30px;
+}

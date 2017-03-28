@@ -1,0 +1,50 @@
+<div class="ui icon
+    {{if (gt (question.file-state state) 1) "green"}}
+  {{if (and (eq (question.file-state state) 1) (eq error true)) "red"}}
+    message">
+  <i class="inbox
+      {{if (gt (question.file-state state) 1) "checkmark"}}
+    {{if (and (eq (question.file-state state) 1) (not-eq error true)) "inbox"}}
+    {{if (and (eq (question.file-state state) 1) (eq error true)) "remove"}}
+      icon"></i>
+  <div class="content" local-class="content">
+    <div class="header" local-class="header">
+      Step 2: Convert
+    </div>
+    {{#if (eq (question.file-state state) 1)}}
+      <button class="ui basic
+        {{if (gt (question.file-state state) 1) "disabled"}}
+        button" {{action "convertFile"}} >
+        <i class="exchange icon"></i>
+        Convert
+      </button>
+    {{/if}}
+    {{#if (gt (question.file-state state) 1)}}
+      <button class="ui basic button" {{action "showHideQuestion"}} >
+        <i class="exchange icon"></i>
+        Show questions
+      </button>
+    {{/if}}
+  </div>
+</div>
+{{#if isShowingQuestions}}
+  <div class="ui olive message">
+    <div class="content">
+      {{#ui-accordion }}
+        {{#each questions as |question index|}}
+          <div class="title">
+            <i class="dropdown icon"></i>
+            Question {{make-sum 1 index}}:
+          </div>
+          <div class="content">
+            <p class="transition hidden">
+              {{question.show-before-create question=question}}
+            </p>
+          </div>
+        {{/each}}
+      {{/ui-accordion}}
+    </div>
+  </div>
+{{/if}}
+<br>
+{{yield}}

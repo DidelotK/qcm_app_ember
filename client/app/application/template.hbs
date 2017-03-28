@@ -1,0 +1,97 @@
+<header>
+  <div class="ui grey inverted three top fixed fluid  item massive menu">
+    {{#if (not-eq model null)}}
+      <a class="item"
+        {{action 'toggle' 'sub-sidebar'}}>
+        <i class="sidebar icon"></i>
+        <div>Menu</div>
+      </a>
+    {{else}}
+      <div class="item">
+      </div>
+    {{/if}}
+    <div class="active item">
+      {{#link-to "index" class="main-title"}}
+        QCM GO
+      {{/link-to}}
+    </div>
+    {{#if (not-eq model null)}}
+      <div class="item">
+        <button type="button" class="white-button" {{action 'logout'}}>Logout</button>
+      </div>
+    {{else}}
+      {{#if (not-eq currentRouteName 'pages.login')}}
+        <div class="item">
+          {{#link-to "pages.login" class="white-button"}}
+              Login
+          {{/link-to}}
+        </div>
+      {{else}}
+        <div class="item">
+        </div>
+      {{/if}}
+    {{/if}}
+  </div>
+</header>
+<div class="page">
+  <div class="ui left demo vertical inverted sidebar labeled icon menu">
+    {{#if (not-eq model null)}}
+      {{#if (eq model 'student')}}
+        {{#link-to "pages.test.register" invokeAction=(action 'toggle' 'sub-sidebar')}}
+          <a class="item">
+            <i class="home icon"></i>
+            Register test
+          </a>
+        {{/link-to}}
+      {{else}}
+        {{#if (eq model 'admin')}}
+          {{#link-to "pages.users" invokeAction=(action 'toggle' 'sub-sidebar')}}
+            <a class="item">
+              <i class="users icon"></i>
+              Users dashboard
+            </a>
+          {{/link-to}}
+        {{/if}}
+        {{#link-to "pages.classes" invokeAction=(action 'toggle' 'sub-sidebar')}}
+          <a class="item">
+            <i class="student icon"></i>
+            Manage classes
+          </a>
+        {{/link-to}}
+        {{#link-to "pages.categories" invokeAction=(action 'toggle' 'sub-sidebar')}}
+          <a class="item">
+            <i class="clone icon"></i>
+            Categories dashboard
+          </a>
+        {{/link-to}}
+        {{#link-to "pages.questions" invokeAction=(action 'toggle' 'sub-sidebar')}}
+          <a class="item">
+            <i class="object group icon"></i>
+            Questions
+          </a>
+        {{/link-to}}
+        {{#link-to "pages.tests" invokeAction=(action 'toggle' 'sub-sidebar')}}
+          <a class="item">
+            <i class="browser icon"></i>
+            Tests dashboard
+          </a>
+        {{/link-to}}
+      {{/if}}
+    {{/if}}
+    <a class="item" {{action 'toggle' 'sub-sidebar'}}>
+      <i class="remove icon"></i>
+      Close
+    </a>
+  </div>
+  <div class="ui container">
+    {{outlet}}
+  </div>
+</div>
+
+<footer>
+  <div class="ui bottom fixed small menu">
+    <div class="item">
+      &copy;2016 Didelot K, Inc.
+    </div>
+  </div>
+</footer>

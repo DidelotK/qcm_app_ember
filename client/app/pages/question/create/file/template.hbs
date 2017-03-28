@@ -1,0 +1,36 @@
+<h1 class="page-title">Create new question</h1>
+
+{{#question.create-nav selected='file' }}{{/question.create-nav}}
+
+{{question.create.step-choose-file
+  action='selectFile'
+  state=state
+}}
+
+{{#if (gt (question.file-state state) 0)}}
+  {{question.create.step-convert-file
+  action='convertFile'
+  file=file
+  state=state
+  }}
+{{/if}}
+
+{{#if (gt (question.file-state state) 1)}}
+  {{question.create.step-categorize
+  action='categorize'
+  units=units
+  courses=courses
+  chapters=chapters
+  state=state
+  }}
+{{/if}}
+
+{{#if (gt (question.file-state state) 2)}}
+  {{question.create.step-valid
+  action='valid'
+  state=state
+  error=error
+  }}
+{{/if}}
+
+{{outlet}}

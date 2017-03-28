@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      {{#ui-dropdown class="selection my-min-width fluid"selected=selectedUnit onChange=(action 'updateUE' selectedUnit)}}
+        <div class="default text">Unit ...</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each units as |unit|}}
+            <div class="item" data-value="{{unit.id}}">
+              {{unit.name}}
+            </div>
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}
+      <br>
+    </div>
+    <div class="col-md-3 col-xs-10">
+      {{#ui-dropdown class="selection my-min-width fluid" selected=selectedCourse onChange=(action (mut selectedCourse)) as |execute mapper|}}
+        <div class="default text">Course ...</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each courses as |course|}}
+            {{#if (eq (is-course-in-unit course selectedUnit) true)}}
+              <div class="item" data-value="{{map-value mapper course}}">
+                {{course.name}}
+              </div>
+            {{/if}}
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}
+    </div>
+    <div class="col-md-2 col-xs-2">
+      <button class="fluid ui icon button button-font-size"
+        {{action 'removeCourse'}}>
+        <i class="remove icon"></i>
+      </button>
+      <br>
+    </div>
+  </div>
+</div>
+
+{{#if error}}
+  <div class="ui negative message">
+    <i class="close icon"
+      {{action 'removeError'}}></i>
+    <div class="header">
+      Error
+    </div>
+    <p>
+      Please select a course to remove
+    </p>
+  </div>
+{{/if}}
+
+{{yield}}

@@ -1,0 +1,37 @@
+<h1 class="page-title">{{model.test.name}}</h1>
+<h4 class="ui horizontal divider header">
+  <i class="book icon"></i>
+  Presentation of the subject
+</h4>
+<div local-class="description" class="ui raised very padded text container">
+  <p>{{model.test.description}}</p>
+</div>
+<h4 class="ui horizontal divider header">
+  Questions
+</h4>
+<div class="ui form">
+  {{#each model.exam.questions as |question index|}}
+    <div class="ui raised very padded text container segment">
+      <p>{{question.question}}</p>
+      <div class="grouped inline fields">
+        {{#each question.all as |response|}}
+          <div class="field">
+            {{ui-radio name=(concat 'response' index)
+            label=response
+            value=response
+            onChange=(action changeResponse index)}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  {{/each}}
+</div>
+<div local-class="button">
+  <button class="ui button"
+          type="submit"
+    {{action 'submit' model.exam.responses}}>
+    Submit
+  </button>
+</div>
+
+{{outlet}}

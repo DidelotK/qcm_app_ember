@@ -1,0 +1,12 @@
+{{users.display-table
+users=users
+removeAction='removeUser'
+}}
+<div class="ui message content-center">
+  <button class="ui button"
+    {{action 'exportUsers'}}>
+    Export users (csv)
+  </button>
+</div>
+
+{{outlet}}

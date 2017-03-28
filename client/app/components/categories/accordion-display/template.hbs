@@ -1,0 +1,35 @@
+{{#ui-accordion class="styled" local-class="size"}}
+  {{#each units as |unit|}}
+    <div class="title">
+      <i class="dropdown icon"></i>
+      {{unit.name}}
+    </div>
+    <div class="content">
+    <p class="transition hidden">
+    <div local-class="courses">
+    {{#each courses as |course|}}
+      {{#if (eq (is-course-in-unit course unit.id) true)}}
+          <div class="title">
+            <i class="dropdown icon"></i>
+            {{course.name}}
+          </div>
+          <div class="content">
+        <p class="transition hidden">
+        {{#each chapters as |chapter|}}
+          {{#if (eq (is-chapter-in-course chapter course.id) true)}}
+              <div local-class="chapters">
+                {{chapter.name}}<br>
+              </div>
+          {{/if}}
+        {{/each}}
+          </p>
+        </div>
+      {{/if}}
+    {{/each}}
+    </div>
+    </p>
+    </div>
+  {{/each}}
+{{/ui-accordion}}
+
+{{yield}}

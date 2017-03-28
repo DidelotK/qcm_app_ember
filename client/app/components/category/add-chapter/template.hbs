@@ -1,0 +1,66 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      {{#ui-dropdown class="selection my-min-width fluid" selected=selectedUnit onChange=(action 'updateUE' selectedUnit)}}
+        <div class="default text">Unit ...</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each units as |unit|}}
+            <div class="item" data-value="{{unit.id}}">
+              {{unit.name}}
+            </div>
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}
+      <br>
+    </div>
+    <div class="col-md-3">
+      {{#ui-dropdown class="selection my-min-width fluid" selected=selectedCourse onChange=(action (mut selectedCourse)) as |execute mapper|}}
+        <div class="default text">Course ...</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each courses as |course|}}
+            {{#if (eq (is-course-in-unit course selectedUnit) true)}}
+              <div class="item" data-value="{{map-value mapper course.id}}">
+                {{course.name}}
+              </div>
+            {{/if}}
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}
+      <br>
+    </div>
+    <div class="col-md-4 col-xs-10">
+      <div class="ui input reset-display">
+        {{input
+        id='chapterToAdd'
+        type='text'
+        value=chapter
+        placeholder="Add chapter"
+        }}
+      </div>
+    </div>
+    <div class="col-md-2 col-xs-2">
+      <button class="fluid ui icon button button-font-size"
+        {{action 'addChapter'}}>
+        <i class="plus icon"></i>
+      </button>
+      <br>
+    </div>
+  </div>
+</div>
+
+{{#if error}}
+  <div class="ui negative message">
+    <i class="close icon"
+      {{action 'removeError'}}></i>
+    <div class="header">
+      Error
+    </div>
+    <p>
+      Please select an unit, course and provide a name for the new chapter
+    </p>
+  </div>
+{{/if}}
+
+{{yield}}

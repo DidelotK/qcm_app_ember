@@ -1,0 +1,86 @@
+<div class="ui relaxed divided list">
+  <table class="ui striped table">
+    <thead>
+    <tr><th>Name</th>
+      <th>State</th>
+      <th>Created at</th>
+      <th>
+        <div class="content-center">
+          <button class="ui icon button" type="button"
+            {{action (route-action 'addTest' user)}}><i class="plus icon"></i>
+          </button>
+        </div>
+      </th>
+    </tr></thead>
+    <tbody>
+    {{#each tests as |test index|}}
+      <tr>
+        <td class="middle aligned">
+          {{test.name}}
+        </td>
+        <td class="middle aligned">
+          {{#if (eq (date test.launchedat test.duration) 0)}}
+            <div local-class="green">
+              Pending
+            </div>
+          {{/if}}
+          {{#if (eq (date test.launchedat test.duration) 1)}}
+            <div local-class="orange">
+              Launched
+            </div>
+          {{/if}}
+          {{#if (eq (date test.launchedat test.duration) 2)}}
+            <div local-class="red">
+              Finish
+            </div>
+          {{/if}}
+        </td>
+        <td class="middle aligned">{{moment-format test.createdat 'dddd, DD MMMM YYYY, HH:mm:ss'}}</td>
+        <td class="middle aligned">
+          <div class="content-center">
+            {{#if (eq (date test.launchedat test.duration) 0)}}
+              <button
+                  local-class="bouton"
+                  class="ui secondary basic button"
+                {{action 'startTest' test}}>Start test</button>
+            {{/if}}
+            {{#if (eq (date test.launchedat test.duration) 1)}}
+              <button
+                  local-class="bouton"
+                  class="ui secondary basic disabled button"
+                >{{moment-to-now
+              (sum-date test.launchedat test.duration)
+              interval=1000
+              hidePrefix=true}}</button>
+            {{/if}}
+            {{#if (eq (date test.launchedat test.duration) 2)}}
+              <button
+                  local-class="bouton"
+                  class="ui secondary basic button"
+                {{action (route-action 'seeResult' test)}}>See result</button>
+            {{/if}}
+          </div>
+        </td>
+      </tr>
+    {{/each}}
+    </tbody>
+    <tfoot>
+    <tr><th colspan="4">
+      <div class="ui right floated pagination menu">
+        <a class="icon item">
+          <i class="left chevron icon"></i>
+        </a>
+        <a class="item">1</a>
+        <a class="item">2</a>
+        <a class="item">3</a>
+        <a class="item">4</a>
+        <a class="icon item">
+          <i class="right chevron icon"></i>
+        </a>
+      </div>
+    </th>
+    </tr></tfoot>
+  </table>
+</div>
+
+{{yield}}

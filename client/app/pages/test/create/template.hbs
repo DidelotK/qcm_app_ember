@@ -1,0 +1,107 @@
+<h1 class="page-title">Create new test</h1>
+<form class="ui form">
+  <div class="field">
+    <label>Test name</label>
+    {{input
+    id='name'
+    type='text'
+    value=model.test.name
+    }}
+  </div>
+  <div class="field">
+    <label>Test description</label>
+    {{textarea
+    id='description'
+    type='text'
+    value=model.test.description
+    }}
+  </div>
+  <div class="field">
+    <label>Unit ensignement</label>
+    {{#ui-dropdown class="search selection" selected=selectedUnit onChange=(action 'updateUE' selectedUnit)}}
+      <div class="default text">Choose an unit ...</div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        {{#each units as |unit|}}
+          <div class="item" data-value="{{unit.id}}">
+            {{unit.name}}
+          </div>
+        {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  </div>
+  <div class="field">
+    <label>Course</label>
+    {{#ui-dropdown class="search selection" selected=selectedCourse onChange=(action 'updateCourse' selectedCourse)}}
+      <div class="default text">Choose a course ...</div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        {{#each courses as |course|}}
+          {{#if (eq (is-course-in-unit course selectedUnit) true)}}
+            <div class="item" data-value="{{course.id}}">
+              {{course.name}}
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  </div>
+  <div class="field">
+    <label>Chapter</label>
+    {{#ui-dropdown class="search selection multiple" selected=selectedChapter onChange=(action 'updateChapters' selectedChapter)}}
+      <div class="default text">Choose the chapter ...</div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        {{#each chapters as |chapter|}}
+          {{#if (eq (is-chapter-in-course chapter selectedCourse) true)}}
+          <div class="item" data-value="{{chapter.id}}">
+            {{chapter.name}}
+          </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  </div>
+  <div class="field">
+    <label>Duration</label>
+    <div class="ui right labeled input">
+      {{input
+      id='duration'
+      type='number'
+      value=model.test.duration
+      }}
+      <div class="ui basic label">minutes</div>
+    </div>
+  </div>
+  <div class="field">
+    <label>Number of question</label>
+    {{input
+    id='numberofquestion'
+    type='number'
+    value=model.test.numberofquestion
+    }}
+  </div>
+  <div class="field">
+    <label>Participating student</label>
+    {{#ui-dropdown class="search selection multiple" selected=suser onChange=(action 'updateUsers' suser)}}
+      <div class="default text">Choose participating student ...</div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        {{#each model.users as |user|}}
+          <div class="item" data-value="{{user.id}}">
+            {{user.email}}
+          </div>
+        {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  </div>
+  <div local-class="button">
+    <button class="ui button"
+            type="submit"
+      {{action 'createTest' model.test}}>
+      Create
+    </button>
+  </div>
+</form>
+
+{{outlet}}

@@ -1,0 +1,47 @@
+<h1 class="page-title">Edit user</h1>
+<form class="ui form">
+  <div class="field">
+    <label>Email</label>
+    {{input
+    id='email_create_user'
+    type='email'
+    value=model.user.email
+    }}
+  </div>
+  <div class="field">
+    <label>Password</label>
+    {{input
+    id='password_create_user'
+    type='text'
+    value=model.user.password
+    }}
+  </div>
+  <div class="field">
+    <label>Role</label>
+    {{#ui-dropdown class="selection" selected=model.user.role onChange=(action 'updateRole')}}
+      <div class="default text">Choose a role ...</div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        {{#each model.roles as |role|}}
+          <div class="item" data-value="{{role}}">
+            {{role}}
+          </div>
+        {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  </div>
+  <div local-class="button">
+    <button class="ui button"
+            type="submit"
+      {{action 'editUser' model.user}}>
+      Save change
+    </button>
+    <button class="ui button"
+            type="button"
+      {{action 'cancel'}}>
+      Cancel
+    </button>
+  </div>
+</form>
+
+{{outlet}}

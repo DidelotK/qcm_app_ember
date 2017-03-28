@@ -1,0 +1,98 @@
+@import 'modules';
+
+/********* FONTS **********/
+@font-face {
+  font-family: 'Collegiate';
+  src: url('/assets/fonts/sf_collegiate/SF Collegiate.ttf') format('truetype')
+}
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  height: 100%;
+}
+body > .ember-view {
+  min-height: 100% !important;
+  height: 100% !important;
+}
+.pusher {
+  min-height: 100%;
+}
+.page {
+  padding-top: 130px;
+  margin-bottom: 100px;
+}
+.description{
+  text-align: justify;
+}
+.color-black {
+  color: black;
+}
+.color-green {
+  color: green !important;
+}
+.white-button {
+  cursor: pointer;
+  display: inline-block;
+  min-height: 1em;
+  outline: none;
+  border: none;
+  color: white !important;
+  vertical-align: baseline;
+  background: transparent none !important;
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  margin: 0em 0.25em 0em 0em;
+  padding: 0.78571429em 1.5em 0.78571429em;
+  text-transform: none;
+  text-shadow: none;
+  font-weight: normal;
+  line-height: 1em;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0.28571429rem;
+  box-shadow: 0px 0px 0px 1px #FFFFFF inset !important;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+  transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+  will-change: '';
+  -webkit-tap-highlight-color: transparent;
+}
+.content-center {
+  margin: auto;
+  padding: 0px;
+  text-align: center;
+}
+.main-title {
+  color: white;
+  font-family: 'Collegiate', Arial, serif;
+  font-size: 2.2em;
+  font-weight: normal;
+  border: none !important;
+}
+.main-title:focus, .main-title:hover{
+  outline: none;
+  border: none !important;
+}
+.page-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.7em;
+}
+.my-min-width {
+  min-width : 0 !important;
+}
+.reset-display {
+  display : inline !important;
+}
+.my-max-width{
+  max-width: 100% !important;
+  border: solid;
+}
+.button-font-size {
+  font-size: 1.14285714rem !important;
+}

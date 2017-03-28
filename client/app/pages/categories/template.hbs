@@ -1,0 +1,44 @@
+<div class="ui raised very padded text container">
+  {{categories.choice-action-menu
+    action='setChoiceFromMenu'
+  }}
+  <br>
+  {{#if (eq choiceMenu.choiceAction 'add')}}
+    {{#if (eq choiceMenu.choiceCategory 'unit')}}
+      {{category.add-unit action='addUnit'}}
+    {{/if}}
+    {{#if (eq choiceMenu.choiceCategory 'course')}}
+      {{category.add-course action='addCourse'
+      units=units}}
+    {{/if}}
+    {{#if (eq choiceMenu.choiceCategory 'chapter')}}
+      {{category.add-chapter action='addChapter'
+      units=units
+      courses=courses}}
+    {{/if}}
+  {{/if}}
+  {{#if (eq choiceMenu.choiceAction 'remove')}}
+    {{#if (eq choiceMenu.choiceCategory 'unit')}}
+      {{category.rm-unit action='removeUnit'
+      units=units}}
+    {{/if}}
+    {{#if (eq choiceMenu.choiceCategory 'course')}}
+      {{category.rm-course action='removeCourse'
+      units=units
+      courses=courses}}
+    {{/if}}
+    {{#if (eq choiceMenu.choiceCategory 'chapter')}}
+      {{category.rm-chapter action='removeChapter'
+      units=units
+      courses=courses
+      chapters=chapters}}
+    {{/if}}
+  {{/if}}
+
+  {{categories.accordion-display
+  units=units
+  courses=courses
+  chapters=chapters}}
+</div>
+
+{{outlet}}

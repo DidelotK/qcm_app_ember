@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 col-xs-10">
+      <div class="ui input reset-display">
+        {{input
+        id='unitToAdd'
+        type='text'
+        value=unit
+        placeholder="Add unit"
+        }}
+      </div>
+    </div>
+    <div class="col-md-2 col-xs-2">
+      <button class="fluid ui icon button button-font-size"
+        {{action 'addUnit'}}>
+        <i class="plus icon"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+{{#if error}}
+  <div class="ui negative message">
+    <i class="close icon"
+      {{action 'removeError'}}></i>
+    <div class="header">
+      Error
+    </div>
+    <p>
+      Please provide a name for the new unit
+    </p>
+  </div>
+{{/if}}
+<br>
+{{yield}}

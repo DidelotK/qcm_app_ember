@@ -1,0 +1,21 @@
+<div class="ui icon
+  {{if (gt (user.file-state state) 0) "green"}}
+  {{if (and (eq (user.file-state state) 0) (eq error true)) "red"}}
+  message">
+  <i class="
+    {{if (gt (user.file-state state) 0) "checkmark"}}
+    {{if (and (eq (user.file-state state) 0) (not-eq error true)) "inbox"}}
+    {{if (and (eq (user.file-state state) 0) (eq error true)) "remove"}}
+   icon"></i>
+  <div class="content" local-class="content">
+    <div class="header" local-class="header">
+      Step 1: Choose a file to convert
+    </div>
+    {{#x-file-input name="files" local-class="custom-button" multiple=false action=(action "selectFile")}}
+      <i class="file icon"></i>
+      Choose a file
+    {{/x-file-input}}
+  </div>
+</div>
+<br>
+{{yield}}

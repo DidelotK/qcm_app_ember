@@ -1,0 +1,20 @@
+<div class="container" local-class="tab">
+  <div class="row">
+    {{#link-to "pages.question.create.form"}}
+      <div class="col-md-6">
+        <div class="fluid ui button {{if (eq selected "file") "basic"}}">
+          From form
+        </div>
+      </div>
+    {{/link-to}}
+    {{#link-to "pages.question.create.file"}}
+      <div class="col-md-6">
+        <div class="fluid ui button {{if (eq selected "form") "basic"}}">
+          From Latex's file
+        </div>
+      </div>
+    {{/link-to}}
+  </div>
+</div>
+
+{{yield}}

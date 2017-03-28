@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      {{#ui-dropdown class="selection multiple my-min-width fluid" selected=unitSelected onChange=(action 'updateUE' unitSelected)}}
+        <div class="default text">Unit ...</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each units as |unit|}}
+            <div class="item" data-value="{{unit.id}}">
+              {{unit.name}}
+            </div>
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}
+      <br>
+    </div>
+    <div class="col-md-4">
+      {{#ui-dropdown class="selection multiple my-min-width fluid" selected=courseSelected onChange=(action 'updateCourse' courseSelected)}}
+        <div class="default text">Course ...</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each courses as |course|}}
+            {{#if (eq (is-course-in-unit course unitSelected) true)}}
+              <div class="item" data-value="{{course.id}}">
+                {{course.name}}
+              </div>
+            {{/if}}
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}
+      <br>
+    </div>
+    <div class="col-md-4">
+      {{#ui-dropdown class="selection multiple my-min-width fluid" selected=chapterSelected onChange=(action 'updateChapter' chapterSelected)}}
+        <div class="default text">Chapter ...</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each chapters as |chapter|}}
+            {{#if (eq (is-chapter-in-course chapter courseSelected) true)}}
+              <div class="item" data-value="{{chapter.id}}">
+                {{chapter.name}}
+              </div>
+            {{/if}}
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}
+    </div>
+  </div>
+</div>
+
+{{yield}}

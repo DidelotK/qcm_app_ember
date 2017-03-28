@@ -1,0 +1,21 @@
+<div class="ui icon
+    {{if (gt (question.file-state state) 3) "green"}}
+  {{if (and (eq (question.file-state state) 3) (eq error true)) "red"}}
+    message">
+  <i class="inbox
+      {{if (gt (question.file-state state) 3) "checkmark"}}
+    {{if (and (eq (question.file-state state) 3) (not-eq error true)) "inbox"}}
+    {{if (and (eq (question.file-state state) 3) (eq error true)) "remove"}}
+      icon"></i>
+  <div class="content" local-class="content">
+    <div class="header" local-class="header">
+      Step 3: Valid
+    </div>
+    <button class="ui basic button" {{action (route-action 'valid')}}>
+      <i class="checkmark box icon"></i>
+      Valid and create the question
+    </button>
+  </div>
+</div>
+<br>
+{{yield}}

@@ -1,0 +1,22 @@
+<div class="ui icon
+    {{if (gt (user.file-state state) 2) "green"}}
+  {{if (and (eq (user.file-state state) 2) (eq error true)) "red"}}
+    message">
+  <i class="inbox
+      {{if (gt (user.file-state state) 2) "checkmark"}}
+    {{if (and (eq (user.file-state state) 2) (not-eq error true)) "inbox"}}
+    {{if (and (eq (user.file-state state) 2) (eq error true)) "remove"}}
+      icon"></i>
+  <div class="content" local-class="content">
+    <div class="header" local-class="header">
+      Step 3: Valid
+    </div>
+    <button class="ui basic button" {{action (route-action 'valid')}}>
+      <i class="checkmark box icon"></i>
+      Valid and create the user
+    </button>
+  </div>
+</div>
+<br>
+
+{{yield}}
